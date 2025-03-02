@@ -1,0 +1,12 @@
+[brick]
+name = "smarciopoly2"
+kind = "binary"
+lang = "c"
+edition = "c99"
+windows.ldflags = "-lgdi32 -lwinmm"
+macos.ldflags = "-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo"
+
+[libs.raylib]
+kind = "git"
+repo = "https://github.com/Tesohh/raylib.brick"
+version = "5.5"
