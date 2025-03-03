@@ -1,5 +1,4 @@
 #include "game.h"
-#include "raylib/raylib.h"
 #include "tile.h"
 #include <stdlib.h>
 #include <string.h>

@@ -1,7 +1,10 @@
 #include "tile.h"
 #include "../utils/utils.h"
 #include "raylib/raylib.h"
+#include <cstdio>
+#include <cstring>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -66,6 +69,24 @@ Tile Tile_new(TileProps props, int i) {
                        .zone = (char*)props.zone};
 
     return tile;
+}
+
+void Tile_update_texture(Tile* tile) {
+    // PERF: image and texture should be unlaoded
+    Image editedImage = ImageCopy(tile->sprite);
+
+    if (tile->tile_type == TileTypeProperty) {
+        char str[64] = "$";
+        sprintf(str + 1, "%d", tile->cost); // crazy cantarella-esque wizardry
+
+        int textWidth = MeasureTextEx(GetFontDefault(), str, 110, 0).x;
+        int textX = editedImage.width / 2 - textWidth / 2;
+
+        ImageDrawTextEx(&editedImage, GetFontDefault(), str, (Vector2){(float)textX, 650}, 110, 0, BLACK);
+    }
+
+    tile->texture = LoadTextureFromImage(editedImage);
+    SetTextureFilter(tile->texture, TEXTURE_FILTER_BILINEAR);
 }
 
 void Tile_destroy(Tile* tile) { UnloadImage(tile->sprite); }
