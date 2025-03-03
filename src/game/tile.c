@@ -1,8 +1,6 @@
 #include "tile.h"
 #include "../utils/utils.h"
 #include "raylib/raylib.h"
-#include <cstdio>
-#include <cstring>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,7 +64,9 @@ Tile Tile_new(TileProps props, int i) {
                        .rect = rect,
                        .rotation = pos.rotation,
                        .cost = props.cost,
-                       .zone = (char*)props.zone};
+                       .zone = props.zone};
+
+    Tile_update_texture(&tile);
 
     return tile;
 }

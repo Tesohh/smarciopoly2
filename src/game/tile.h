@@ -17,6 +17,18 @@ typedef enum {
     TileTypeProbability
 } TileType;
 
+typedef enum {
+    TileZoneNone,
+    TileZoneSmarcio,
+    TileZoneRestaurants,
+    TileZoneBrixen,
+    TileZoneClubs,
+    TileZoneBolzanoCity,
+    TileZoneIndustry,
+    TileZoneOutskirts,
+    TileZoneLuxury,
+} TileZone;
+
 typedef struct {
     Rectangle rect;
     uint32_t rotation;
@@ -25,7 +37,7 @@ typedef struct {
     TileType tile_type;
 
     uint32_t cost;
-    char* zone;
+    TileZone zone;
 
     // Generated fields
     Texture texture;
@@ -35,7 +47,7 @@ typedef struct {
     const char* sprite_path;
     TileType type;
     uint32_t cost;
-    const char* zone;
+    TileZone zone;
 } TileProps;
 
 Tile Tile_new(TileProps, int);
