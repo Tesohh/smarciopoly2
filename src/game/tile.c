@@ -89,4 +89,8 @@ void Tile_update_texture(Tile* tile) {
     SetTextureFilter(tile->texture, TEXTURE_FILTER_BILINEAR);
 }
 
+void Tile_draw(Tile* tile) {
+    DrawTextureEx(tile->texture, (Vector2){.x = tile->rect.x, .y = tile->rect.y}, tile->rotation, 1.0, WHITE);
+}
+
 void Tile_destroy(Tile* tile) { UnloadImage(tile->sprite); }
