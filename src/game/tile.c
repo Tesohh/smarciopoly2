@@ -1,5 +1,5 @@
 #include "tile.h"
-#include "game.h"
+#include "../utils/utils.h"
 #include "raylib/raylib.h"
 #include <stdint.h>
 #include <stdlib.h>
@@ -41,9 +41,26 @@ TilePosition _get_tile_pos(int i) {
 
 Tile Tile_new(TileProps props, int i) {
     TilePosition pos = _get_tile_pos(i);
+    Rectangle rect;
+
+    switch (props.type) {
+    case TileTypeStart:
+    case TileTypePrison:
+    case TileTypeAwards:
+    case TileTypePolice:
+        rect = (Rectangle){pos.x, pos.y, TILE_WIDTH * 2, TILE_HEIGHT};
+        break;
+    case TileTypeProperty:
+    case TileTypeChance:
+    case TileTypeProbability:
+        rect = (Rectangle){pos.x, pos.y, TILE_WIDTH, TILE_HEIGHT};
+        break;
+    }
+
+    rect = RotateRectangle(rect, pos.rotation);
+
     Tile tile = (Tile){.sprite = LoadImage(props.sprite_path),
-                       .pos.x = pos.x,
-                       .pos.y = pos.y,
+                       .rect = rect,
                        .rotation = pos.rotation,
                        .cost = props.cost,
                        .zone = (char*)props.zone};

@@ -5,7 +5,6 @@
 #include <string.h>
 
 Map Map_new(void) {
-    SetTraceLogLevel(LOG_NONE);
 
     Map map = {0};
     map.tiles = malloc(sizeof(Tile) * GAME_TILE_COUNT);

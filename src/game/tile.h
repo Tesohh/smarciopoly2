@@ -18,7 +18,7 @@ typedef enum {
 } TileType;
 
 typedef struct {
-    Vector2 pos;
+    Rectangle rect;
     uint32_t rotation;
     Image sprite;
 
@@ -26,6 +26,9 @@ typedef struct {
 
     uint32_t cost;
     char* zone;
+
+    // Generated fields
+    Texture texture;
 } Tile;
 
 typedef struct {
@@ -37,6 +40,7 @@ typedef struct {
 
 Tile Tile_new(TileProps, int);
 void Tile_destroy(Tile*);
-void Tile_draw(void);
+void Tile_draw(Tile*);
+void Tile_update_texture(Tile*);
 void Tile_debug(void);
 #endif
