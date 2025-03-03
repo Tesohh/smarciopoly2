@@ -2,6 +2,7 @@
 #include "game/map.h"
 #include "game/tile.h"
 #include "raylib/raylib.h"
+#include "utils/utils.h"
 #include <stdio.h>
 
 #define NOMINAL_WIDTH MAP_SIZE
@@ -14,6 +15,7 @@
 int main(void) {
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
     SetConfigFlags(FLAG_MSAA_4X_HINT);
+    SetTraceLogCallback(PrettyLogCallback);
 
     InitWindow(1080, 720, "Smarciopoly");
     InitAudioDevice();

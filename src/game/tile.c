@@ -13,29 +13,39 @@ typedef struct {
 } TilePosition;
 
 TilePosition _get_tile_pos(int i) {
-    int row, col;
-    TilePosition pos;
+    TilePosition pos = {0};
 
     if (i < 8) { // Top row (left to right)
-        col = 8 - i;
-        row = 8;
+        pos.x = (TILE_WIDTH * (8 - i)) + TILE_WIDTH - BORDER_OVERHANG;
+        pos.y = (TILE_WIDTH * (8)) + TILE_WIDTH - BORDER_OVERHANG;
         pos.rotation = 0;
+    } else if (i == 8) { // PRISON
+        pos.x = 0 - BORDER_OVERHANG;
+        pos.y = (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG;
+        pos.rotation = 0;
+
+    } else if (i == 12) {
+        pos.x = 2000;
+        pos.y = 2800;
+        pos.rotation = 90;
     } else if (i < 16) { // Left column (top to bottom)
-        col = 0;
-        row = 15 - i;
+        // Tile("resources/tiles/probability.png", TILE_HEIGHT+BORDER_OVERHANG,
+        // (TILE_WIDTH*7)+(TILE_WIDTH)-BORDER_OVERHANG, 90, TileType::PROBABILITY, 0, "", ""),
+        pos.x = TILE_HEIGHT + BORDER_OVERHANG + (TILE_WIDTH * 2);
+        pos.y = (TILE_WIDTH * (8 - i)) - BORDER_OVERHANG;
         pos.rotation = 90;
     } else if (i < 24) { // Bottom row (right to left)
-        col = i - 16;
-        row = 0;
-        pos.rotation = 180;
+        // col = i - 16;
+        // row = 0;
+        // pos.rotation = 180;
     } else { // Right column (bottom to top)
-        col = 8;
-        row = i - 24;
-        pos.rotation = 270;
+        // col = 8;
+        // row = i - 24;
+        // pos.rotation = 270;
     }
 
-    pos.x = (TILE_WIDTH * col) + TILE_WIDTH - BORDER_OVERHANG;
-    pos.y = (TILE_WIDTH * row) + TILE_WIDTH - BORDER_OVERHANG;
+    // pos.x = (TILE_WIDTH * col) + TILE_WIDTH - BORDER_OVERHANG;
+    // pos.y = (TILE_WIDTH * row) + TILE_WIDTH - BORDER_OVERHANG;
 
     return pos;
 }
@@ -90,7 +100,10 @@ void Tile_update_texture(Tile* tile) {
 }
 
 void Tile_draw(Tile* tile) {
+    Rectangle fake_rect = RotateRectangle(tile->rect, -tile->rotation);
     DrawTextureEx(tile->texture, (Vector2){.x = tile->rect.x, .y = tile->rect.y}, tile->rotation, 1.0, WHITE);
+    if (tile->rect.x != 0 && tile->rect.y != 0)
+        DrawRectangleRec(tile->rect, RED);
 }
 
 void Tile_destroy(Tile* tile) { UnloadImage(tile->sprite); }

@@ -38,3 +38,5 @@ Rectangle RotateRectangle(Rectangle rectangle, float rotation) {
 void DebugRectangle(Rectangle r, const char* prefix) {
     TraceLog(LOG_INFO, "%s x=%f y=%f width=%f height=%f", prefix, r.x, r.y, r.width, r.height);
 }
+
+void PrettyLogCallback(int msgType, const char* text, va_list args);

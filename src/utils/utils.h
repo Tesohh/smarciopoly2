@@ -6,4 +6,5 @@
 Rectangle RotateRectangle(Rectangle rectangle, float rotation);
 void DebugRectangle(Rectangle r, const char* prefix);
 
+void PrettyLogCallback(int msgType, const char* text, va_list args);
 #endif
