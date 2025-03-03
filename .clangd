@@ -1,4 +1,0 @@
-Completion:
-  AllScopes: Yes  # Suggest functions from all scopes
-  DeducedType: Yes  # Improve inferred completions
-  IncludeIneligibleResults: Yes  # Show functions that need adjustments
