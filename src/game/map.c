@@ -1,5 +1,6 @@
 #include "game.h"
 #include "tile.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 

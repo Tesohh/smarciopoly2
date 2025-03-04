@@ -71,10 +71,11 @@ Tile Tile_new(TileProps props, int i) {
     rect = RotateRectangle(rect, pos.rotation);
 
     Tile tile = (Tile){.sprite = LoadImage(props.sprite_path),
-                       .rect = rect,
+                       .pos = Vector2_new(pos.x, pos.y),
                        .rotation = pos.rotation,
                        .cost = props.cost,
-                       .zone = props.zone};
+                       .zone = props.zone,
+                       ._rect = rect};
 
     Tile_update_texture(&tile);
 
@@ -95,15 +96,10 @@ void Tile_update_texture(Tile* tile) {
         ImageDrawTextEx(&editedImage, GetFontDefault(), str, (Vector2){(float)textX, 650}, 110, 0, BLACK);
     }
 
-    tile->texture = LoadTextureFromImage(editedImage);
-    SetTextureFilter(tile->texture, TEXTURE_FILTER_BILINEAR);
+    tile->_texture = LoadTextureFromImage(editedImage);
+    SetTextureFilter(tile->_texture, TEXTURE_FILTER_BILINEAR);
 }
 
-void Tile_draw(Tile* tile) {
-    Rectangle fake_rect = RotateRectangle(tile->rect, -tile->rotation);
-    DrawTextureEx(tile->texture, (Vector2){.x = tile->rect.x, .y = tile->rect.y}, tile->rotation, 1.0, WHITE);
-    if (tile->rect.x != 0 && tile->rect.y != 0)
-        DrawRectangleRec(tile->rect, RED);
-}
+void Tile_draw(Tile* tile) { DrawTextureEx(tile->_texture, tile->pos, tile->rotation, 1.0, WHITE); }
 
 void Tile_destroy(Tile* tile) { UnloadImage(tile->sprite); }

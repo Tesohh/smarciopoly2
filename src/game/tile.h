@@ -30,7 +30,7 @@ typedef enum {
 } TileZone;
 
 typedef struct {
-    Rectangle rect;
+    Vector2 pos;
     uint32_t rotation;
     Image sprite;
 
@@ -40,7 +40,8 @@ typedef struct {
     TileZone zone;
 
     // Generated fields
-    Texture texture;
+    Texture _texture;
+    Rectangle _rect;
 } Tile;
 
 typedef struct {
