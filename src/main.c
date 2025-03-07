@@ -23,8 +23,8 @@ int main(void) {
     Game_init();
 
     Camera2D camera = {0};
-    camera.zoom = 0.1f;
-    camera.offset = (Vector2){.x = 200, .y = 200};
+    camera.zoom = 0.15f;
+    camera.offset = (Vector2){.x = 0, .y = 0};
 
     SetTargetFPS(30);
     while (!WindowShouldClose()) {
@@ -41,9 +41,10 @@ int main(void) {
             }
 
             DrawRectangle(0, 0, MAP_SIZE, MAP_SIZE, MONOPOLY_COLOR);
-            for (int i = 0; i < GAME_TILE_COUNT; i++) {
-                Tile_draw(game.map.tiles + i);
-            }
+            Tile_draw(game.map.tiles + 0);
+            // for (int i = 0; i < GAME_TILE_COUNT; i++) {
+            //     Tile_draw(game.map.tiles + i);
+            // }
             DrawFPS(0, 0);
         }
         EndMode2D();

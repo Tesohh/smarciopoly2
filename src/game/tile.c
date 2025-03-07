@@ -66,17 +66,22 @@ Tile Tile_new(TileProps props, int i) {
     case TileTypeProperty:
     case TileTypeChance:
     case TileTypeProbability:
+    case TileTypeStation:
         rect = (Rectangle){pos.x, pos.y, TILE_WIDTH, TILE_HEIGHT};
         break;
     }
 
     rect = RotateRectangle(rect, pos.rotation);
 
-    char buf[128] = "resources/tiles";
+    char buf[128] = "resources/tiles/";
     strncat(buf, props.sprite_name, 128 - 1);
 
+    if (props.bgcolor == 0) {
+        props.bgcolor = 0xFFFFFFFF;
+    }
+
     Picture picture = {.sprite = LoadImage(buf),
-                       .bgcolor = props.bgcolor,
+                       .bgcolor = GetColor(props.bgcolor),
                        .render_borders = !props.hide_borders,
                        .render_cost = !props.hide_cost,
                        .render_name = !props.hide_name};
@@ -96,6 +101,8 @@ Tile Tile_new(TileProps props, int i) {
 
 void Tile_update_texture(Tile* tile) {
     // TODO: use larger width if prison tile
+    printf("#%02x%02x%02x%02x", tile->picture.bgcolor.r, tile->picture.bgcolor.g, tile->picture.bgcolor.b,
+           tile->picture.bgcolor.a);
     Image target = GenImageColor(TILE_WIDTH, TILE_HEIGHT, tile->picture.bgcolor);
     ImageDrawBorderRect(&target, (Rectangle){0, 0, TILE_WIDTH, TILE_HEIGHT}, BLACK, tile->picture.bgcolor, 16);
 
@@ -114,14 +121,14 @@ void Tile_update_texture(Tile* tile) {
 
         Rectangle cost_rect = {28, 656, 340, 100};
         ImageDrawBorderRect(&target, cost_rect, BLACK, WHITE, 0);
-        ImageDrawHorizontallyCenteredText(&target, cost_rect, 680, cost_str, game.fonts.ui, 50, BLACK);
+        ImageDrawHorizontallyCenteredText(&target, cost_rect, 680, cost_str, game.fonts.ui, 110, BLACK);
     }
 
     if (tile->picture.render_name) {
         Rectangle name_rect = {28, 28, 340, 180};
         if (tile->picture.render_borders)
             ImageDrawBorderRect(&target, name_rect, BLACK, WHITE, 0);
-        ImageDrawCenteredText(&target, name_rect, tile->name, game.fonts.ui, 50, BLACK);
+        ImageDrawCenteredText(&target, name_rect, tile->name, game.fonts.ui, 110, BLACK);
     }
 
     tile->_texture = LoadTextureFromImage(target);

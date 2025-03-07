@@ -18,7 +18,8 @@ typedef enum {
     TileTypeAwards,
     TileTypePolice,
     TileTypeChance,
-    TileTypeProbability
+    TileTypeProbability,
+    TileTypeStation,
 } TileType;
 
 typedef enum {
