@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "../camera/imaxcamera.h"
 #include "map.h"
 #include <stdint.h>
 #define GAME_TILE_COUNT 32
@@ -19,6 +20,7 @@ typedef struct {
     } sprites;
 
     Map map;
+    ImaxCamera camera;
 } Game;
 
 void Game_init();

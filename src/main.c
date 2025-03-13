@@ -1,3 +1,4 @@
+#include "camera/imaxcamera.h"
 #include "game/game.h"
 #include "game/map.h"
 #include "game/tile.h"
@@ -22,15 +23,20 @@ int main(void) {
 
     Game_init();
 
-    Camera2D camera = {0};
-    camera.zoom = 0.15f;
-    camera.offset = (Vector2){.x = 0, .y = 0};
+    game.camera = ImaxCamera_new((Camera2D){0}, NOMINAL_SIZE);
+    game.camera.mode = IMAXCAMERA_MODE_DRAMATIC_FOLLOW;
+    game.camera.offset = (Vector2){GetScreenWidth() / 2.0f, GetScreenHeight() / 2.0f};
+    game.camera.zoom = ImaxCamera_GetNormalizedZoom(&game.camera);
+    ImaxCamera_Normalize(&game.camera);
 
     SetTargetFPS(30);
     while (!WindowShouldClose()) {
+        if (IsWindowResized())
+            ImaxCamera_Normalize(&game.camera);
+        ImaxCamera_Update(&game.camera, GetFrameTime());
 
         BeginDrawing();
-        BeginMode2D(camera);
+        BeginMode2D(ImaxCamera_AsCamera2D(&game.camera));
         {
             ClearBackground(MONOPOLY_COLOR);
             // PERF: smerdolox (unefficient background drawing)
