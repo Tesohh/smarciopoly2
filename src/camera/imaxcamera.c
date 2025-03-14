@@ -1,6 +1,7 @@
 #include "imaxcamera.h"
 #include "raylib/raylib.h"
 #include "raylib/raymath.h"
+#include <stdio.h>
 
 ImaxCamera ImaxCamera_new(Camera2D cam, Vector2 nominal_size) {
     return (ImaxCamera){.offset = cam.offset,
@@ -15,7 +16,7 @@ ImaxCamera ImaxCamera_new(Camera2D cam, Vector2 nominal_size) {
 float ImaxCamera_GetNormalizedZoom(ImaxCamera* cam) {
     Vector2 actual_size = {(float)GetScreenWidth(), (float)GetScreenHeight()};
 
-    cam->scale_factor.x = actual_size.x / (cam->scale_factor.x);
+    cam->scale_factor.x = actual_size.x / (cam->nominal_size.x);
     cam->scale_factor.y = actual_size.y / (cam->nominal_size.y);
 
     if (actual_size.x > actual_size.y)
