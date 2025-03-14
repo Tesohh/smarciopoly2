@@ -16,13 +16,15 @@ void Game_init() {
     // game.map = Map_new();
     game.map = (Map){0};
     game.map.tiles = malloc(sizeof(Tile) * GAME_TILE_COUNT);
-    game.map.tiles[0] = Tile_new((TileProps){.sprite_name = "chance.png",
-                                             .name = "Chance",
-                                             .type = TileTypeChance,
-                                             .cost = 0,
-                                             .zone = TileZoneNone,
-                                             .bgcolor = 0x2F80EDFF,
-                                             .hide_borders = true,
-                                             .hide_cost = true},
-                                 0);
+    for (int i = 0; i < GAME_TILE_COUNT; i++) {
+        game.map.tiles[i] = Tile_new((TileProps){.sprite_name = "chance.png",
+                                                 .name = "Chance",
+                                                 .type = TileTypeChance,
+                                                 .cost = 0,
+                                                 .zone = TileZoneNone,
+                                                 .bgcolor = 0x2F80EDFF,
+                                                 .hide_borders = true,
+                                                 .hide_cost = true},
+                                     i);
+    }
 }

@@ -35,6 +35,11 @@ int main(void) {
             ImaxCamera_Normalize(&game.camera);
         ImaxCamera_Update(&game.camera, GetFrameTime());
 
+        if (IsKeyPressed(KEY_DOWN))
+            game.camera.target_zoom -= 0.1;
+        if (IsKeyPressed(KEY_UP))
+            game.camera.target_zoom += 0.1;
+
         BeginDrawing();
         BeginMode2D(ImaxCamera_AsCamera2D(&game.camera));
         {
@@ -47,10 +52,9 @@ int main(void) {
             }
 
             DrawRectangle(0, 0, MAP_SIZE, MAP_SIZE, MONOPOLY_COLOR);
-            Tile_draw(game.map.tiles + 0);
-            // for (int i = 0; i < GAME_TILE_COUNT; i++) {
-            //     Tile_draw(game.map.tiles + i);
-            // }
+            for (int i = 0; i < GAME_TILE_COUNT; i++) {
+                Tile_draw(game.map.tiles + i);
+            }
             DrawFPS(0, 0);
         }
         EndMode2D();
