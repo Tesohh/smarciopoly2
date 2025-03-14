@@ -101,8 +101,7 @@ Tile Tile_new(TileProps props, int i) {
 
 void Tile_update_texture(Tile* tile) {
     // TODO: use larger width if prison tile
-    printf("#%02x%02x%02x%02x", tile->picture.bgcolor.r, tile->picture.bgcolor.g, tile->picture.bgcolor.b,
-           tile->picture.bgcolor.a);
+    ColorDebugTraceLog(LOG_INFO, tile->picture.bgcolor);
     Image target = GenImageColor(TILE_WIDTH, TILE_HEIGHT, tile->picture.bgcolor);
     ImageDrawBorderRect(&target, (Rectangle){0, 0, TILE_WIDTH, TILE_HEIGHT}, BLACK, tile->picture.bgcolor, 16);
 
