@@ -26,7 +26,7 @@ TilePosition _get_tile_pos(int i) {
         pos.width = TILE_WIDTH * 2;
     } else if (i < 8) { // Top row (left to right)
         pos.x = (TILE_WIDTH * (8 - i)) + TILE_WIDTH - BORDER_OVERHANG;
-        pos.y = (TILE_WIDTH * (8)) + TILE_WIDTH - BORDER_OVERHANG;
+        pos.y = (TILE_WIDTH * (8)) + TILE_WIDTH - BORDER_OVERHANG + 8;
         pos.rotation = 0;
     } else if (i == 8) {
         // 0 - BORDER_OVERHANG, (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG, 0
@@ -34,7 +34,7 @@ TilePosition _get_tile_pos(int i) {
         pos.y = (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG;
         pos.width = TILE_WIDTH * 2;
     } else if (i < 16) {
-        pos.x = TILE_HEIGHT + BORDER_OVERHANG;
+        pos.x = TILE_HEIGHT + BORDER_OVERHANG - 8;
         pos.y = (TILE_WIDTH * (i - 7)) - BORDER_OVERHANG;
         pos.rotation = 90;
     } else if (i == 16) {
@@ -43,7 +43,7 @@ TilePosition _get_tile_pos(int i) {
         pos.width = TILE_WIDTH * 2;
     } else if (i < 24) {
         pos.x = (TILE_WIDTH * (i - 16)) + (TILE_WIDTH * 2) + BORDER_OVERHANG;
-        pos.y = TILE_HEIGHT + BORDER_OVERHANG;
+        pos.y = TILE_HEIGHT + BORDER_OVERHANG - 8;
         pos.rotation = 180;
     } else if (i == 24) {
         pos.x = (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG;
@@ -51,7 +51,7 @@ TilePosition _get_tile_pos(int i) {
         pos.width = TILE_WIDTH * 2;
     } else if (i < 32) {
         // (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG, (TILE_WIDTH * 1) + (TILE_WIDTH * 2) + BORDER_OVERHANG, 270
-        pos.x = (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG;
+        pos.x = (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG + 8;
         pos.y = (TILE_WIDTH * (i - 24)) + (TILE_WIDTH * 2) + BORDER_OVERHANG;
         pos.rotation = 270;
     }
@@ -118,7 +118,7 @@ void Tile_update_texture(Tile* tile, bool skip_generation) {
 
             Rectangle cost_rect = {28, 656, 340, 100};
             ImageDrawBorderRect(&target, cost_rect, BLACK, WHITE, 0);
-            ImageDrawHorizontallyCenteredText(&target, cost_rect, 680, cost_str, game.fonts.ui, 110, BLACK);
+            ImageDrawHorizontallyCenteredText(&target, cost_rect, 650, cost_str, game.fonts.ui, 100, BLACK);
         }
 
         if (tile->picture.render_name) {
