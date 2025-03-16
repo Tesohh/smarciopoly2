@@ -75,6 +75,6 @@ typedef struct {
 Tile Tile_new(TileProps, int);
 void Tile_destroy(Tile*);
 void Tile_draw(Tile*);
-void Tile_update_texture(Tile*);
+void Tile_update_texture(Tile*, bool);
 void Tile_debug(void);
 #endif

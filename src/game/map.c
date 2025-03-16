@@ -11,7 +11,7 @@ Map Map_new(void) {
     map.tiles = malloc(sizeof(Tile) * GAME_TILE_COUNT);
 
     TileProps props[GAME_TILE_COUNT] = {
-        {.sprite_name = "life.png", .name = "VIA", .type = TileTypeStart, .zone = TileZoneNone},
+        {.sprite_name = "large_go.png", .name = "VIA", .type = TileTypeStart, .zone = TileZoneNone},
         {.sprite_name = "baraccopoli.png",
          .name = "Baraccopoli",
          .type = TileTypeProperty,
@@ -40,7 +40,7 @@ Map Map_new(void) {
          .zone = TileZoneRestaurants},
         {.sprite_name = "kebz.png", .name = "KeBZ", .type = TileTypeProperty, .cost = 0, .zone = TileZoneRestaurants},
 
-        {.sprite_name = "life.png", .name = "PRIGIONE", .type = TileTypePrison, .zone = TileZoneNone},
+        {.sprite_name = "large_go.png", .name = "VIA", .type = TileTypeStart, .zone = TileZoneNone},
         {.sprite_name = "probability.png",
          .name = "Probabilita",
          .type = TileTypeProbability,
@@ -68,7 +68,7 @@ Map Map_new(void) {
         {.sprite_name = "life.png", .name = "Life", .type = TileTypeProperty, .cost = 0, .zone = TileZoneClubs},
         {.sprite_name = "baila.png", .name = "Baila", .type = TileTypeProperty, .cost = 0, .zone = TileZoneClubs},
 
-        {.sprite_name = "life.png", .name = "Awards", .type = TileTypeAwards, .cost = 0, .zone = TileZoneNone},
+        {.sprite_name = "large_go.png", .name = "VIA", .type = TileTypeStart, .zone = TileZoneNone},
         {.sprite_name = "talvera.png",
          .name = "Talvera",
          .type = TileTypeProperty,
@@ -100,7 +100,7 @@ Map Map_new(void) {
         {.sprite_name = "twenty.png", .name = "Twenty", .type = TileTypeProperty, .cost = 0, .zone = TileZoneIndustry},
         {.sprite_name = "noi.png", .name = "NOI", .type = TileTypeProperty, .cost = 0, .zone = TileZoneIndustry},
 
-        {.sprite_name = "life.png", .name = "Police", .type = TileTypePolice, .cost = 0, .zone = TileZoneNone},
+        {.sprite_name = "large_go.png", .name = "VIA", .type = TileTypeStart, .zone = TileZoneNone},
         {.sprite_name = "baita.png", .name = "Baita", .type = TileTypeProperty, .cost = 0, .zone = TileZoneOutskirts},
         {.sprite_name = "bronzolo.png",
          .name = "Bronzolo",
