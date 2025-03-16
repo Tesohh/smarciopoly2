@@ -72,9 +72,13 @@ Tile Tile_new(TileProps props, int i) {
     if (props.bgcolor == 0) {
         props.bgcolor = 0xFFFFFFFF;
     }
+    if (props.name_font_size == 0) {
+        props.name_font_size = 110;
+    }
 
     Picture picture = {.sprite = LoadImage(buf),
                        .bgcolor = GetColor(props.bgcolor),
+                       .name_font_size = props.name_font_size,
                        .render_borders = !props.hide_borders,
                        .render_cost = !props.hide_cost,
                        .render_name = !props.hide_name};
@@ -121,7 +125,31 @@ void Tile_update_texture(Tile* tile, bool skip_generation) {
             Rectangle name_rect = {28, 28, 340, 180};
             if (tile->picture.render_borders)
                 ImageDrawBorderRect(&target, name_rect, BLACK, WHITE, 0);
-            ImageDrawCenteredText(&target, name_rect, tile->name, game.fonts.ui, 110, BLACK);
+
+            int newline_index = -1;
+            int len = strlen(tile->name);
+            for (int i = 0; i < len; i++) {
+                if (tile->name[i] == '\n') {
+                    newline_index = i;
+                }
+            }
+
+            uint32_t font_size = tile->picture.name_font_size;
+
+            if (newline_index == -1) {
+                ImageDrawCenteredText(&target, name_rect, tile->name, game.fonts.ui, font_size, BLACK);
+            } else {
+                Rectangle name_rect_top = {28, 28, 340, 96};
+                Rectangle name_rect_bottom = {28, 105, 340, 96};
+
+                char name_str_top[newline_index];
+                strncpy(name_str_top, tile->name, newline_index);
+                name_str_top[newline_index] = '\0';
+                char* name_str_bottom = (char*)tile->name + newline_index + 1;
+
+                ImageDrawCenteredText(&target, name_rect_top, name_str_top, game.fonts.ui, font_size, BLACK);
+                ImageDrawCenteredText(&target, name_rect_bottom, name_str_bottom, game.fonts.ui, font_size, BLACK);
+            }
         }
 
         tile->_texture = LoadTextureFromImage(target);
