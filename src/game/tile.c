@@ -122,9 +122,9 @@ void Tile_update_texture(Tile* tile, bool skip_generation) {
         }
 
         if (tile->picture.render_name) {
-            Rectangle name_rect = {28, 28, 340, 180};
+            Rectangle border_rect = {28, 28, 340, 180};
             if (tile->picture.render_borders)
-                ImageDrawBorderRect(&target, name_rect, BLACK, WHITE, 0);
+                ImageDrawBorderRect(&target, border_rect, BLACK, WHITE, 0);
 
             int newline_index = -1;
             int len = strlen(tile->name);
@@ -137,10 +137,11 @@ void Tile_update_texture(Tile* tile, bool skip_generation) {
             uint32_t font_size = tile->picture.name_font_size;
 
             if (newline_index == -1) {
+                Rectangle name_rect = {24, 28, 330, 180};
                 ImageDrawCenteredText(&target, name_rect, tile->name, game.fonts.ui, font_size, BLACK);
             } else {
-                Rectangle name_rect_top = {28, 28, 340, 96};
-                Rectangle name_rect_bottom = {28, 105, 340, 96};
+                Rectangle name_rect_top = {24, 28, 330, 96};
+                Rectangle name_rect_bottom = {24, 105, 330, 96};
 
                 char name_str_top[newline_index];
                 strncpy(name_str_top, tile->name, newline_index);
