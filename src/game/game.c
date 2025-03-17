@@ -12,6 +12,8 @@ void Game_init() {
     SetTextureFilter(game.fonts.ui.texture, TEXTURE_FILTER_TRILINEAR);
     game.sounds.bell = LoadSound("resources/sounds/bell.wav");
     game.sprites.bg = LoadTexture("resources/bg.png");
+    GenTextureMipmaps(&game.sprites.bg);
+    SetTextureFilter(game.sprites.bg, TEXTURE_FILTER_TRILINEAR);
 
     game.map = Map_new();
 }

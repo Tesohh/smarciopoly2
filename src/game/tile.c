@@ -165,6 +165,7 @@ void Tile_update_texture(Tile* tile, bool skip_generation) {
         }
 
         tile->_texture = LoadTextureFromImage(target);
+        GenTextureMipmaps(&tile->_texture);
         SetTextureFilter(tile->_texture, TEXTURE_FILTER_TRILINEAR);
 
         UnloadImage(target);
