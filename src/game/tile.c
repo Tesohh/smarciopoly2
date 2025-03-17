@@ -75,6 +75,9 @@ Tile Tile_new(TileProps props, int i) {
     if (props.name_rect_bgcolor == 0) {
         props.name_rect_bgcolor = 0xFFFFFFFF;
     }
+    if (props.name_text_color == 0) {
+        props.name_text_color = 0xFFFFFFFF;
+    }
     if (props.name_font_size == 0) {
         props.name_font_size = 110;
     }
@@ -83,6 +86,7 @@ Tile Tile_new(TileProps props, int i) {
                        .bgcolor = GetColor(props.bgcolor),
                        .name_font_size = props.name_font_size,
                        .name_rect_bgcolor = GetColor(props.name_rect_bgcolor),
+                       .name_text_color = GetColor(props.name_text_color),
                        .render_borders = !props.hide_borders,
                        .render_cost = !props.hide_cost,
                        .render_name = !props.hide_name};
@@ -141,23 +145,27 @@ void Tile_update_texture(Tile* tile, bool skip_generation) {
             uint32_t font_size = tile->picture.name_font_size;
 
             if (newline_index == -1) {
-                Rectangle name_rect = {24, 28, 330, 180};
-                ImageDrawCenteredText(&target, name_rect, tile->name, game.fonts.ui, font_size, BLACK);
+                Rectangle name_rect = {30, 28, 330, 180};
+                ImageDrawCenteredText(&target, name_rect, tile->name, game.fonts.ui, font_size,
+                                      tile->picture.name_text_color);
             } else {
-                Rectangle name_rect_top = {24, 28, 330, 96};
-                Rectangle name_rect_bottom = {24, 105, 330, 96};
+                Rectangle name_rect_top = {30, 28, 330, 96};
+                Rectangle name_rect_bottom = {30, 105, 330, 96};
 
                 char name_str_top[newline_index];
                 strncpy(name_str_top, tile->name, newline_index);
                 name_str_top[newline_index] = '\0';
                 char* name_str_bottom = (char*)tile->name + newline_index + 1;
 
-                ImageDrawCenteredText(&target, name_rect_top, name_str_top, game.fonts.ui, font_size, BLACK);
-                ImageDrawCenteredText(&target, name_rect_bottom, name_str_bottom, game.fonts.ui, font_size, BLACK);
+                ImageDrawCenteredText(&target, name_rect_top, name_str_top, game.fonts.ui, font_size,
+                                      tile->picture.name_text_color);
+                ImageDrawCenteredText(&target, name_rect_bottom, name_str_bottom, game.fonts.ui, font_size,
+                                      tile->picture.name_text_color);
             }
         }
 
         tile->_texture = LoadTextureFromImage(target);
+        SetTextureFilter(tile->_texture, TEXTURE_FILTER_TRILINEAR);
 
         UnloadImage(target);
     } else {

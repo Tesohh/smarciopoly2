@@ -29,7 +29,7 @@ int main(void) {
     game.camera.zoom = ImaxCamera_GetNormalizedZoom(&game.camera);
     ImaxCamera_Normalize(&game.camera);
 
-    SetTargetFPS(30);
+    SetTargetFPS(60);
     while (!WindowShouldClose()) {
         if (IsWindowResized())
             ImaxCamera_Normalize(&game.camera);
