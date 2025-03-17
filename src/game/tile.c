@@ -72,6 +72,9 @@ Tile Tile_new(TileProps props, int i) {
     if (props.bgcolor == 0) {
         props.bgcolor = 0xFFFFFFFF;
     }
+    if (props.name_rect_bgcolor == 0) {
+        props.name_rect_bgcolor = 0xFFFFFFFF;
+    }
     if (props.name_font_size == 0) {
         props.name_font_size = 110;
     }
@@ -79,6 +82,7 @@ Tile Tile_new(TileProps props, int i) {
     Picture picture = {.sprite = LoadImage(buf),
                        .bgcolor = GetColor(props.bgcolor),
                        .name_font_size = props.name_font_size,
+                       .name_rect_bgcolor = GetColor(props.name_rect_bgcolor),
                        .render_borders = !props.hide_borders,
                        .render_cost = !props.hide_cost,
                        .render_name = !props.hide_name};
@@ -124,7 +128,7 @@ void Tile_update_texture(Tile* tile, bool skip_generation) {
         if (tile->picture.render_name) {
             Rectangle border_rect = {28, 28, 340, 180};
             if (tile->picture.render_borders)
-                ImageDrawBorderRect(&target, border_rect, BLACK, WHITE, 0);
+                ImageDrawBorderRect(&target, border_rect, BLACK, tile->picture.name_rect_bgcolor, 0);
 
             int newline_index = -1;
             int len = strlen(tile->name);

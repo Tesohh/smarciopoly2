@@ -38,6 +38,7 @@ typedef enum {
 typedef struct {
     Image sprite;
     Color bgcolor;
+    Color name_rect_bgcolor;
     uint32_t name_font_size;
     bool render_borders;
     bool render_cost;
@@ -69,6 +70,7 @@ typedef struct {
 
     unsigned int bgcolor;
     uint32_t name_font_size;
+    unsigned int name_rect_bgcolor;
     bool hide_borders;
     bool hide_cost;
     bool hide_name;
