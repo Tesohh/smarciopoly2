@@ -18,7 +18,7 @@ int main(void) {
     SetConfigFlags(FLAG_MSAA_4X_HINT);
     SetTraceLogCallback(PrettyLogCallback);
 
-    InitWindow(1080, 720, "Smarciopoly");
+    InitWindow(720, 720, "Smarciopoly");
     InitAudioDevice();
 
     Game_init();
@@ -39,6 +39,15 @@ int main(void) {
             game.camera.target_zoom -= 0.1;
         if (IsKeyPressed(KEY_UP))
             game.camera.target_zoom += 0.1;
+
+        if (IsKeyDown(KEY_W))
+            game.camera.target_origin.y -= 50;
+        if (IsKeyDown(KEY_A))
+            game.camera.target_origin.x -= 50;
+        if (IsKeyDown(KEY_S))
+            game.camera.target_origin.y += 50;
+        if (IsKeyDown(KEY_D))
+            game.camera.target_origin.x += 50;
 
         BeginDrawing();
         BeginMode2D(ImaxCamera_AsCamera2D(&game.camera));
