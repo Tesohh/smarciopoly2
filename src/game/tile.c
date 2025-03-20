@@ -24,18 +24,17 @@ TilePosition _get_tile_pos(int i) {
         pos.x = (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG;
         pos.y = (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG;
         pos.width = TILE_WIDTH * 2;
-    } else if (i < 8) { // Top row (left to right)
+    } else if (i < 8) {
         pos.x = (TILE_WIDTH * (8 - i)) + TILE_WIDTH - BORDER_OVERHANG;
         pos.y = (TILE_WIDTH * (8)) + TILE_WIDTH - BORDER_OVERHANG + 8;
         pos.rotation = 0;
     } else if (i == 8) {
-        // 0 - BORDER_OVERHANG, (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG, 0
         pos.x = 0 - BORDER_OVERHANG;
         pos.y = (TILE_WIDTH * 8) + (TILE_WIDTH)-BORDER_OVERHANG;
         pos.width = TILE_WIDTH * 2;
     } else if (i < 16) {
         pos.x = TILE_HEIGHT + BORDER_OVERHANG - 8;
-        pos.y = (TILE_WIDTH * (i - 7)) - BORDER_OVERHANG;
+        pos.y = (TILE_WIDTH * (16 - i)) + (TILE_WIDTH)-BORDER_OVERHANG;
         pos.rotation = 90;
     } else if (i == 16) {
         pos.x = 0 - BORDER_OVERHANG;
